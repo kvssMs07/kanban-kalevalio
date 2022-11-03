@@ -1,0 +1,33 @@
+<div class="container-fluid">
+  <div cdkDropListGroup class="row">
+    <div class="col-sm-6 col-lg-3 mb-3" *ngFor="let column of boardService.getBoard$() | async">
+
+      <!-- Titre de la colonne -->
+      <div class="d-flex justify-content-between align-items-center p-2 shadow-sm column-header">
+        <h2 class="m-0">{{column.title}}</h2>
+        <button mat-icon-button class="icon-delete" (click)="onDeleteColumn(column.id)">
+          <mat-icon style="font-size: 20px;">delete</mat-icon>
+        </button>
+      </div>
+
+      <!-- Ajouter une nouvelle tache dans une colonne -->
+      <app-dialog (emitText)="onAddCard($event, column.id)" [question]="'Ajouter une nouvelle tache dans ' + column.title ">
+        <button mat-raised-button class="w-100 mb-1 btn-add">+</button>
+      </app-dialog>
+
+      <!-- Couleur pour les taches d'une colonne -->
+      <!-- <app-color-panel (emitColor)="onColorChange($event, column.id)"></app-color-panel> -->
+      
+      <div cdkDropList [cdkDropListData]="column.list" class="example-list" (cdkDropListDropped)="drop($event)">
+        <div cdkDrag class="example-box" style="background-color: #F2F2F2;color:black" *ngFor="let item of column.list">
+          <app-board-item 
+            [item]="item" 
+            (emitDeleteCard)="onDeleteCard($event, column.id)"
+          > 
+
+          </app-board-item>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

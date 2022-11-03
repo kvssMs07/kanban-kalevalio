@@ -1,0 +1,12 @@
+<mat-toolbar  class="shadow justify-content-between px-5 mb-4" style="background-color:black; color:white">
+  <div>
+    <span class="mat-h2">KANBAN - MATAILA Kalevalio</span>
+  </div>
+  <div>
+    <app-dialog (emitText)="addColumn($event)" question="Ajouter une colonne">
+      <button mat-raised-button color="primary" style="background-color:grey">
+        Ajouter une colonne
+      </button>
+    </app-dialog>
+  </div>
+</mat-toolbar>
